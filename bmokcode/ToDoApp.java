@@ -1,3 +1,4 @@
+package bmokcode;
 import java.util.Scanner;
 
 public class ToDoApp {

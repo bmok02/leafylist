@@ -2,6 +2,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.border.Border;
 
+import bmokcode.Task;
+
 import java.awt.BorderLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
