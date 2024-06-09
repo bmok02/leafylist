@@ -27,7 +27,7 @@ blackBackdrop.addEventListener("click", toggleAddTaskForm);
 
 
 
-// add categories and tasks iwth js
+// add categories and tasks with js
 
 let categories = [
     {
@@ -172,6 +172,7 @@ const renderTasks = () => {
 
                 //change true to false or vice versa 
                 tasks[index].completed =! tasks[index].completed;
+                
                 //save in our local storage 
                 saveLocal();
             });

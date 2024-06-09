@@ -155,11 +155,11 @@ body {
     width: 3rem;
 }
 
-.category .content h1 {
+.category .content h1 { /*Priority Heading*/
     font-size: 1.5rem;
 }
 
-.category .content p {
+.category .content p { /*Number of tasks under heading*/
     color: rgb(0, 0, 0);
     font-size: 0.8rem;
     opacity: 0.6;
