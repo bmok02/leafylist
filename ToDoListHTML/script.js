@@ -42,10 +42,10 @@ let categories = [
         title: "Low Priority",
         img: "cactus.PNG",
     },
-    {
-        title: "Others",
-        img: "mushroom.PNG",
-    }
+    //{
+        //title: "Others",
+        //img: "mushroom.PNG",
+    //}
 ];
 
 let tasks = [ 

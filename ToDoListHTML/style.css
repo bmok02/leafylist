@@ -446,3 +446,9 @@ body {
     opacity: 1;
     visibility: visible;
 }
+
+.center {
+    margin: auto;
+    width: 15%;
+    padding: 10px;
+  }
