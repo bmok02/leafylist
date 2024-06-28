@@ -12,11 +12,11 @@
 
 body {
     min-height: 100vh;
-    color: #2e2e2e;
+    color: var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(196, 218, 239);
+    background-color: var(--primary-color);
     font-family: "Inter", sans-serif;
 }
 
@@ -32,9 +32,9 @@ body {
 @media (min-width:768px) {
     .wrapper {
         height: 50rem;
-        width: 25rem;
+        width: 90rem;
         border-radius: 40px;
-        border: 10px solid #2e2e2e;
+        border: 10px solid var(--primary-color);
     }
 }
 
@@ -56,6 +56,28 @@ body {
     transform: translate(-50%, -60%);
 }
 
+/* light mode dark mode */
+#mode {
+    width: 30px;
+    cursor: pointer;
+}
+
+:root {
+    --primary-color: rgb(196, 218, 239);
+    --bubble-color: rgb(150, 195, 177);
+    --secondary-color: rgb(16, 48, 77);
+    --cat-color: rgb(255, 255, 255);
+    --add-word: #666;
+}
+
+.dark-theme {
+    --primary-color: rgb(9, 42, 73);
+    --bubble-color: rgb(20, 62, 46);
+    --secondary-color: rgb(255, 255, 255);
+    --cat-color: rgb(0, 0, 0);
+    --add-word: #ffffff;
+}
+
 .screen-backdrop {
     width: 135%;
     height: 25rem;
@@ -65,7 +87,7 @@ body {
     z-index: -1;
     transform: translateX(-50%);
     border-radius: 0 0 50% 50%;
-    background-color: rgb(150, 195, 177);
+    background-color: var(--bubble-color);
     transform: all 0.3s;
 }
 
@@ -76,14 +98,14 @@ body {
 .menu-btn {
     width: 2rem;
     cursor: pointer;
-    color:#2e2e2e;
+    color: var(--secondary-color);
 }
 
 .welcome {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    color: #0f201b;
+    color: var(--secondary-color);
 }
 
 .welcome h1 {
@@ -108,7 +130,7 @@ body {
     left: 50%;
     transform: translateX(-50%);
     width: 5rem;
-    height: 4.5rem;
+    height: 5rem;
     border-radius: 50%;
     background-color: rgb(196, 193, 195);
     z-index: -1;
@@ -130,7 +152,7 @@ body {
 }
 
 .category {
-    background-color: rgb(255, 255, 255);
+    background-color: var(--cat-color);
     border-radius: 0.5rem;
     padding: 1.5rem 1rem;
     cursor: pointer;
@@ -160,7 +182,7 @@ body {
 }
 
 .category .content p { /*Number of tasks under heading*/
-    color: rgb(0, 0, 0);
+    color: var(--secondary-color);
     font-size: 0.8rem;
     opacity: 0.6;
 }
@@ -258,7 +280,7 @@ body {
     width: 1rem;
     height: 1rem;
     border-radius: 2px;
-    border: 1px solid #2e2e2e;
+    border: 1px solid var(--secondary-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -266,7 +288,7 @@ body {
 
 .task .checkmark svg {
     width: 1rem;
-    color: #2e2e2e;
+    color: var(--secondary-color);
     opacity: 0;
     transition: all 0.3s;
 }
@@ -298,7 +320,7 @@ body {
     height: 2rem;
     padding: 0.5rem;
     border-radius: 50%;
-    color: #2e2e2e;
+    color: var(--secondary-color);
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.031);
     opacity: 0;
@@ -328,7 +350,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgb(150, 195, 177);
+    background-color: var(--bubble-color);
     transition: all 0.3s;
 }
 
@@ -344,7 +366,7 @@ body {
 
 .add-task-btn svg {
     width: 2rem;
-    color: #2e2e2e;
+    color: var(--secondary-color);
 }
 
 .add-task {
@@ -379,7 +401,7 @@ body {
 .input-group input,
 .input-group select {
     width: 100%;
-    border: 1px solid rgb(196, 218, 239);
+    border: 1px solid rgb(24, 27, 30);
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
@@ -390,7 +412,7 @@ body {
     padding: 0 5px;
     margin-top: 5px;
     font-size: 14px;
-    color: #666;
+    color: var(--add-word);
     margin-bottom: 5px;
 }
 
@@ -413,8 +435,8 @@ body {
 }
 
 .btns button.add-btn {
-    background-color: rgb(150, 195, 177);
-    color: #2e2e2e;
+    background-color: var(--bubble-color);
+    color: var(--secondary-color);
 }
 
 .add-task-backdrop {
@@ -425,7 +447,7 @@ body {
     width: 135%;
     height: 20rem;
     border-radius: 50% 50% 0 0;
-    background-color: #fff;
+    background-color: var(--primary-color);
     border-top: 1px solid ;
 }
 

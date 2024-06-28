@@ -7,7 +7,7 @@
         <title>Todo List Application</title>
     </head>
     <body>
-        <div class="wrapper show-category">         <!--the phone screen-->
+        <div class="wrapper">         <!--the phone screen-->
             <div class="screen-backdrop"></div>
             <div class="screen home-screen">
                 <div class="head-wrapper">
@@ -30,10 +30,13 @@
                     <a href="garden.html">Visit My Garden!</a>
                     <div class="welcome">
                         <div class="content">
+                            <img src="icons/moon.PNG" id = "mode">
                             <h1>Hello Wenjie</h1>
+                            
                             <p>Today you have <span class="totalTasks">0</span> tasks</p>
                         </div>
                         <div class="img">
+                            
                             <div class="backdrop"></div>
                             <img src="icons/girl-leave.PNG" alt="">
                             <h6> Water Droplets💧: <span class="score"></span></h6> 
@@ -209,5 +212,16 @@
         </div>
 
         <script src="main.js"></script>
+        <script>
+            var mode = document.getElementById("mode");
+            mode.onclick = function() {
+                document.body.classList.toggle("dark-theme");
+                if(document.body.classList.contains("dark-theme")) {
+                    mode.src = "icons/sun.PNG";
+                } else {
+                    mode.src = "icons/moon.PNG";
+                }
+            }
+        </script>
     </body>
     </html>
