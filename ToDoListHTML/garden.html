@@ -1,24 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="main.css">
-        <title>My Garden</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="main.css">
+    <title>My Garden</title>
 </head>
+
 <body>
-    <div class="wrapper show-category">
+    <div class="wrapper"> <!--the phone screen-->
         <div class="screen-backdrop"></div>
-        <div class="content">
-            <h1 class="center">Wenjie's Garden</h1>
-            <img src="sample_seed.png" alt="seed"> <!--not sure why this not working:(-->
-            <h3 class="center">Water your plant today!</h3>
+        <div class="screen home-screen">
+
+            <a href="main.html">Back to Tasks!</a>
+            <div class="welcome">
+                <div class="content">
+                    <img src="icons/moon.PNG" id="mode">
+                    <h1>Hello Wenjie</h1>
+
+                    <p>Today you have <span class="totalTasks">0</span> tasks</p>
+                </div>
+                <div class="img">
+
+                    <div class="backdrop"></div>
+                    <img src="icons/girl-leave.PNG" alt="">
+                    <h6> Water Droplets💧: <span class="score"></span></h6>
+                </div>
+            </div>
+        </div>
+
+        <!-- categories -->
+        <div class="categories-wrapper">
+            <div class="categories">
+                <div class="category">
+                    <div class="left">
+                        <img src="icons/water-plant.PNG" alt="">
+                        <div class="content">
+                            <h1>High Priority</h1>
+                            <p>0 Tasks</p>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="toggle-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="categories">
+                <div class="category">
+                    <div class="left">
+                        <a href="https://open.spotify.com/playlist/37i9dQZF1E4yhpveBnebcw?si=2eaaea4f6b4c4665"> Check
+                            out our Lofi Playlist</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-        <!-- backdrop -->
-        <div class="black-backdrop"></div>
+
+    <!-- add task btn -->
+    <div class="add-task-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+            class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+    </div>
+
+    <!-- backdrop -->
+    <div class="black-backdrop"></div>
+    <!-- add task form -->
+    <div class="add-task">
+        <div class="add-task-backdrop"></div>
+        <h1 class="heading">Add Task</h1>
+        <div class="input-group">
+            <label for="task-input">Task</label>
+            <input type="text" id="task-input" required />
+        </div>
+        <div class="input-group">
+            <label for="category-select">Priority Level</label>
+            <select name="" id="category-select"></select>
+        </div>
+        <div class="btns">
+            <button class="cancel-btn">Cancel</button>
+            <button class="add-btn">Add</button>
+        </div>
+    </div>
     </div>
 
     <script src="main.js"></script>
+    <script>
+        var mode = document.getElementById("mode");
+        mode.onclick = function () {
+            document.body.classList.toggle("dark-theme");
+            if (document.body.classList.contains("dark-theme")) {
+                mode.src = "icons/sun.PNG";
+            } else {
+                mode.src = "icons/moon.PNG";
+            }
+        }
+    </script>
 </body>
+
 </html>
