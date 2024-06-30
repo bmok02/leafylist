@@ -177,11 +177,13 @@ body {
     width: 3rem;
 }
 
-.category .content h1 { /*Priority Heading*/
+.category .content h1 {
+    /*Priority Heading*/
     font-size: 1.5rem;
 }
 
-.category .content p { /*Number of tasks under heading*/
+.category .content p {
+    /*Number of tasks under heading*/
     color: var(--secondary-color);
     font-size: 0.8rem;
     opacity: 0.6;
@@ -448,7 +450,7 @@ body {
     height: 20rem;
     border-radius: 50% 50% 0 0;
     background-color: var(--primary-color);
-    border-top: 1px solid ;
+    border-top: 1px solid;
 }
 
 .black-backdrop {
@@ -473,4 +475,18 @@ body {
     margin: auto;
     width: 15%;
     padding: 10px;
-  }
+}
+
+.garden-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Adjust based on your layout */
+}
+
+#water-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}

@@ -4,25 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="garden.css">
     <title>My Garden</title>
 </head>
 
 <body>
-    <div class="wrapper"> <!--the phone screen-->
+    <div class="wrapper">
         <div class="screen-backdrop"></div>
         <div class="screen home-screen">
-
             <a href="main.html">Back to Tasks!</a>
             <div class="welcome">
                 <div class="content">
                     <img src="icons/moon.PNG" id="mode">
-                    <h1>Hello Wenjie</h1>
-
-                    <p>Today you have <span class="totalTasks">0</span> tasks</p>
+                    <h1>Hello orbitalms2</h1>
+                    <h4>Welcome to your garden!</h4>
                 </div>
                 <div class="img">
-
                     <div class="backdrop"></div>
                     <img src="icons/girl-leave.PNG" alt="">
                     <h6> Water Droplets💧: <span class="score"></span></h6>
@@ -30,66 +27,10 @@
             </div>
         </div>
 
-        <!-- categories -->
-        <div class="categories-wrapper">
-            <div class="categories">
-                <div class="category">
-                    <div class="left">
-                        <img src="icons/water-plant.PNG" alt="">
-                        <div class="content">
-                            <h1>High Priority</h1>
-                            <p>0 Tasks</p>
-                        </div>
-                    </div>
-                    <div class="options">
-                        <div class="toggle-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                                stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M12 6.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 12.75a.75.75 0 110-1.5.75.75 0 010 1.5zM12 18.75a.75.75 0 110-1.5.75.75 0 010 1.5z" />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="categories">
-                <div class="category">
-                    <div class="left">
-                        <a href="https://open.spotify.com/playlist/37i9dQZF1E4yhpveBnebcw?si=2eaaea4f6b4c4665"> Check
-                            out our Lofi Playlist</a>
-                    </div>
-                </div>
-            </div>
+        <div class="garden-center">
+            <img src="icons/l1seed.PNG" alt="" id="plant-image">
+            <button id="water-button">Water the Plant</button>
         </div>
-    </div>
-
-    <!-- add task btn -->
-    <div class="add-task-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-        </svg>
-    </div>
-
-    <!-- backdrop -->
-    <div class="black-backdrop"></div>
-    <!-- add task form -->
-    <div class="add-task">
-        <div class="add-task-backdrop"></div>
-        <h1 class="heading">Add Task</h1>
-        <div class="input-group">
-            <label for="task-input">Task</label>
-            <input type="text" id="task-input" required />
-        </div>
-        <div class="input-group">
-            <label for="category-select">Priority Level</label>
-            <select name="" id="category-select"></select>
-        </div>
-        <div class="btns">
-            <button class="cancel-btn">Cancel</button>
-            <button class="add-btn">Add</button>
-        </div>
-    </div>
     </div>
 
     <script src="main.js"></script>
@@ -103,6 +44,44 @@
                 mode.src = "icons/moon.PNG";
             }
         }
+
+        var plantImages = [
+            "icons/l1seed.PNG",
+            "icons/l2seed.PNG",
+            "icons/l3seed.PNG",
+            "icons/l4seed.PNG",
+            "icons/l5seed.PNG",
+            "icons/l6seed.PNG"
+        ];
+
+        var plantImage = document.getElementById("plant-image");
+        var waterButton = document.getElementById("water-button");
+        var scoreSpan = document.querySelector(".score");
+
+        var score = parseInt(localStorage.getItem("waterDroplets")) || 0;
+        scoreSpan.textContent = score;
+
+        var currentImageIndex = 0;
+
+        waterButton.addEventListener("click", function () {
+            if (score > 0) {
+                score--;
+                localStorage.setItem("waterDroplets", score);
+                scoreSpan.textContent = score;
+            } else {
+                alert("No more water droplets left!");
+            }
+
+            // Change the plant image
+            currentImageIndex = (currentImageIndex + 1) % plantImages.length;
+            plantImage.src = plantImages[currentImageIndex];
+        });
+
+        // Ensure the score is consistent across pages
+        window.addEventListener("load", function () {
+            score = parseInt(localStorage.getItem("waterDroplets")) || 0;
+            scoreSpan.textContent = score;
+        });
     </script>
 </body>
 
