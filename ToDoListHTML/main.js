@@ -144,7 +144,7 @@ const renderTasks = () => {
                 if (tasks[index].completed) {
                     waterDroplets++;
                 } else {
-                    waterDroplets--; // Decrease if needed
+                    waterDroplets--;
                 }
 
                 const scoreElement = document.querySelector(".score");
@@ -182,34 +182,33 @@ const renderTasks = () => {
                 renderTasks();
             });
         });
-
-        renderCategories();
-        calculateTotal();
     }
+
+    renderCategories();
+    calculateTotal();
 };
 
 const saveLocal = () => {
     localStorage.setItem("tasks", JSON.stringify(tasks));
-    localStorage.setItem("waterDroplets", waterDroplets.toString()); // Save water droplets count
+    localStorage.setItem("waterDroplets", waterDroplets.toString());
 };
-
-let waterDroplets = 0; // Initialize water droplets
 
 const getLocal = () => {
     const localTasks = JSON.parse(localStorage.getItem("tasks"));
     const localWaterDroplets = parseInt(localStorage.getItem("waterDroplets"), 10);
     if (localTasks) {
         tasks = localTasks;
-        waterDroplets = localWaterDroplets || 0; // Initialize water droplets from localStorage
     }
+    waterDroplets = localWaterDroplets || 0; // Initialize water droplets from localStorage
 };
+
+let waterDroplets = 0; // Initialize water droplets
 
 // Update UI initially
 const scoreElement = document.querySelector(".score");
 scoreElement.textContent = waterDroplets;
 
 // Functionality to add new tasks
-
 const categorySelect = document.querySelector("#category-select");
 const cancelBtn = document.querySelector(".cancel-btn");
 const addBtn = document.querySelector(".add-btn");
@@ -245,6 +244,6 @@ categories.forEach((category) => {
     categorySelect.appendChild(option);
 });
 
-getLocal();
+getLocal(); // Initialize tasks and water droplets from localStorage
 calculateTotal();
 renderTasks();

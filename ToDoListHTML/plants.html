@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="garden.css">
+    <title>Plants Grown</title>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="screen-backdrop"></div>
+        <div class="screen plants-screen">
+            <a href="garden.html">Back to Garden</a>
+            <div class="plants-list">
+                <h1>Your Grown Plants</h1>
+                <div class="plants-container" id="plants-container">
+                    <!-- Plants will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        var plantImages = [
+            "icons/l1seed.PNG",
+            "icons/l2seed.PNG",
+            "icons/l3seed.PNG",
+            "icons/l4seed.PNG",
+            "icons/l5seed.PNG",
+            "icons/l6seed.PNG"
+        ];
+
+        var plantsContainer = document.getElementById("plants-container");
+
+        window.addEventListener("load", function () {
+            var plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
+
+            for (var i = 0; i < plantsGrown; i++) {
+                var plantImg = document.createElement("img");
+                plantImg.src = "icons/l6seed.PNG"; // Only display l6 seed plants
+                plantImg.alt = "l6 seed";
+                plantsContainer.appendChild(plantImg);
+            }
+        });
+    </script>
+</body>
+
+</html>

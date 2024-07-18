@@ -23,13 +23,18 @@
                     <div class="backdrop"></div>
                     <img src="icons/girl-leave.PNG" alt="">
                     <h6> Water Droplets💧: <span class="score"></span></h6>
+                    <h6> Plants Grown: <span class="plants-grown"></span></h6>
+                </div>
+                <div class="top-right-button">
+                    <button id="view-plants-button">View your grown plants!
+                    </button>
                 </div>
             </div>
         </div>
 
         <div class="garden-center">
-            <img src="icons/l1seed.PNG" alt="" id="plant-image">
-            <button id="water-button">Water the Plant</button>
+            <img src="" alt="" id="plant-image">
+            <button id="water-button">Water💧</button>
         </div>
     </div>
 
@@ -57,30 +62,45 @@
         var plantImage = document.getElementById("plant-image");
         var waterButton = document.getElementById("water-button");
         var scoreSpan = document.querySelector(".score");
+        var plantsGrownSpan = document.querySelector(".plants-grown");
 
         var score = parseInt(localStorage.getItem("waterDroplets")) || 0;
+        var plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
         scoreSpan.textContent = score;
+        plantsGrownSpan.textContent = plantsGrown;
 
-        var currentImageIndex = 0;
+        var currentImageIndex = parseInt(localStorage.getItem("currentImageIndex")) || 0;
+        plantImage.src = plantImages[currentImageIndex];
 
         waterButton.addEventListener("click", function () {
             if (score > 0) {
                 score--;
                 localStorage.setItem("waterDroplets", score);
                 scoreSpan.textContent = score;
+
+                if (plantImage.src.endsWith("l6seed.PNG")) {
+                    plantsGrown++;
+                    localStorage.setItem("plantsGrown", plantsGrown);
+                    plantsGrownSpan.textContent = plantsGrown;
+                }
             } else {
                 alert("No more water droplets left!");
             }
 
-            // Change the plant image
             currentImageIndex = (currentImageIndex + 1) % plantImages.length;
+            localStorage.setItem("currentImageIndex", currentImageIndex);
             plantImage.src = plantImages[currentImageIndex];
         });
 
-        // Ensure the score is consistent across pages
+        document.getElementById("view-plants-button").addEventListener("click", function () {
+            window.location.href = "plants.html"; // Navigate to plants.html
+        });
+
         window.addEventListener("load", function () {
             score = parseInt(localStorage.getItem("waterDroplets")) || 0;
+            plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
             scoreSpan.textContent = score;
+            plantsGrownSpan.textContent = plantsGrown;
         });
     </script>
 </body>
