@@ -51,7 +51,7 @@ body {
     transform: translateX(-50%);
     border-radius: 0 0 50% 50%;
     background-color: var(--bubble-color);
-    transition: all 0.3s;
+    transform: all 0.3s;
 }
 
 #mode {
@@ -139,6 +139,17 @@ body {
 
 
 
+
+.screen {
+    position: relative;
+    width: 80%;
+    max-width: 1200px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
 .plants-list h1 {
     text-align: center;
     margin-bottom: 20px;
@@ -153,54 +164,4 @@ body {
 .plants-container img {
     width: 100%;
     height: auto;
-}
-
-/* Add styles for the "View Your Grown Plants" button */
-#view-plants-button {
-    padding: 12px 24px;
-    font-size: 18px;
-    color: #fff;
-    background-color: #28a745;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-block;
-    margin-top: 20px;
-}
-
-#view-plants-button:hover {
-    background-color: #218838;
-}
-
-/* Styles for the circular "Back to Tasks" button with an icon and text */
-.back-to-tasks-button-wrapper {
-    position: absolute;
-    top: 20px; /* Adjust as needed */
-    left: 20px; /* Adjust as needed */
-}
-
-.back-to-tasks-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 50%;
-    background-color: #28a745; /* Background color */
-    color: #fff; /* Text color */
-    text-decoration: none;
-    font-size: 16px; /* Adjust font size as needed */
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better visibility */
-    transition: background-color 0.3s;
-}
-
-.back-to-tasks-button:hover {
-    background-color: #218838; /* Hover background color */
-}
-
-.back-to-tasks-button svg {
-    width: 24px; /* Adjust size as needed */
-    height: 24px; /* Adjust size as needed */
-    margin-right: 8px; /* Space between icon and text */
 }

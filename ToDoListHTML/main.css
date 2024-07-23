@@ -490,3 +490,36 @@ body {
     font-size: 16px;
     cursor: pointer;
 }
+/* New styles for the circular "Garden" button with an icon and text */
+.garden-button-wrapper {
+    position: absolute;
+    top: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+}
+
+.garden-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px; /* Adjust size as needed */
+    height: 60px; /* Adjust size as needed */
+    border-radius: 30px; /* Rounded edges */
+    background-color: #28a745; /* Background color */
+    color: #fff; /* Text color */
+    text-decoration: none;
+    font-size: 16px; /* Adjust font size as needed */
+    text-align: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better visibility */
+    transition: background-color 0.3s;
+}
+
+.garden-button:hover {
+    background-color: #218838; /* Hover background color */
+}
+
+.garden-button svg {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    margin-right: 8px; /* Space between icon and text */
+}

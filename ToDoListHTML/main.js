@@ -247,3 +247,5 @@ categories.forEach((category) => {
 getLocal(); // Initialize tasks and water droplets from localStorage
 calculateTotal();
 renderTasks();
+
+
