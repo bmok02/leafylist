@@ -12,7 +12,13 @@
     <div class="wrapper">
         <div class="screen-backdrop"></div>
         <div class="screen home-screen">
-            <a href="main.html">Back to Tasks!</a>
+            <div class="head-wrapper">
+                <div class="back-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18" />
+                    </svg>
+                </div>
+            </div>
             <div class="welcome">
                 <div class="content">
                     <img src="icons/moon.PNG" id="mode">
@@ -40,6 +46,13 @@
 
     <script src="main.js"></script>
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const backBtn = document.querySelector(".back-btn");
+            backBtn.addEventListener("click", function() {
+                window.location.href = "main.html"; // Replace with your main.html file path
+            });
+        });
+
         var mode = document.getElementById("mode");
         mode.onclick = function () {
             document.body.classList.toggle("dark-theme");
@@ -103,6 +116,7 @@
             plantsGrownSpan.textContent = plantsGrown;
         });
     </script>
+    
 </body>
 
 </html>

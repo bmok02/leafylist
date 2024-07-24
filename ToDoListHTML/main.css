@@ -101,6 +101,45 @@ body {
     color: var(--secondary-color);
 }
 
+/* side menu */
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden off-screen */
+    width: 250px;
+    height: 100vh;
+    background-color: var(--cat-color);
+    transition: left 0.3s ease; /* Smooth slide-in animation */
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.side-menu.show {
+    left: 0; /* Slide in when 'show' class is present */
+}
+
+.side-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0; /* Optional: Add margin to the list */
+}
+
+.side-menu ul li {
+    padding: 10px;
+}
+
+.side-menu ul li a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease; /* Smooth background transition */
+}
+
+.side-menu ul li a:hover {
+    background-color: #ddd; /* Example: Highlight on hover */
+}
+
 .welcome {
     display: flex;
     justify-content: space-between;

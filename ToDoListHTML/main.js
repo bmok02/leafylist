@@ -6,7 +6,12 @@ const toggleScreen = () => {
     wrapper.classList.toggle("show-category");
 };
 
-menuBtn.addEventListener("click", toggleScreen);
+const toggleMenu = () => {
+    const sideMenu = document.querySelector('.side-menu');
+    sideMenu.classList.toggle('show');
+};
+
+menuBtn.addEventListener("click", toggleMenu);
 backBtn.addEventListener("click", toggleScreen);
 
 const addTaskBtn = document.querySelector(".add-task-btn");
