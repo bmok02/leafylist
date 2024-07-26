@@ -24,26 +24,17 @@
 
     <script src="main.js"></script>
     <script>
-        var plantImages = [
-            "icons/l1seed.PNG",
-            "icons/l2seed.PNG",
-            "icons/l3seed.PNG",
-            "icons/l4seed.PNG",
-            "icons/l5seed.PNG",
-            "icons/l6seed.PNG"
-        ];
-
         var plantsContainer = document.getElementById("plants-container");
 
         window.addEventListener("load", function () {
-            var plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
-
-            for (var i = 0; i < plantsGrown; i++) {
+            var grownPlants = JSON.parse(localStorage.getItem("grownPlants")) || [];
+            
+            grownPlants.forEach(function(plantImageSrc) {
                 var plantImg = document.createElement("img");
-                plantImg.src = "icons/l6seed.PNG"; // Only display l6 seed plants
-                plantImg.alt = "l6 seed";
+                plantImg.src = plantImageSrc;
+                plantImg.alt = "Grown plant";
                 plantsContainer.appendChild(plantImg);
-            }
+            });
         });
     </script>
 </body>

@@ -6,11 +6,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="garden.css">
     <title>My Garden</title>
+    <style>
+        /* Modal background overlay */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+        }
+
+        /* Modal content box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px; /* Limit max width */
+            overflow: auto; /* Add scroll if needed */
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+        }
+
+        /* Close button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <div class="screen-backdrop"></div>
+        <!-- Existing elements -->
         <div class="screen home-screen">
             <div class="head-wrapper">
                 <div class="back-btn">
@@ -32,8 +73,7 @@
                     <h6> Plants Grown: <span class="plants-grown"></span></h6>
                 </div>
                 <div class="top-right-button">
-                    <button id="view-plants-button">View your grown plants!
-                    </button>
+                    <button id="view-plants-button">View your grown plants!</button>
                 </div>
             </div>
         </div>
@@ -41,6 +81,25 @@
         <div class="garden-center">
             <img src="" alt="" id="plant-image">
             <button id="water-button">Water💧</button>
+        </div>
+
+        <!-- Series Selection Modal -->
+        <div id="series-selection-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Choose Your Plant Series</h2>
+                <form id="series-form">
+                    <label>
+                        <input type="radio" name="series" value="basic1" checked>
+                        Basic 1 (Seed Series)
+                    </label>
+                    <label>
+                        <input type="radio" name="series" value="basic2">
+                        Basic 2 (Flower Series)
+                    </label>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
         </div>
     </div>
 
@@ -50,6 +109,11 @@
             const backBtn = document.querySelector(".back-btn");
             backBtn.addEventListener("click", function() {
                 window.location.href = "main.html"; // Replace with your main.html file path
+            });
+
+            const viewPlantsButton = document.getElementById("view-plants-button");
+            viewPlantsButton.addEventListener("click", function() {
+                window.location.href = "plants.html"; // Replace with your plants.html file path
             });
         });
 
@@ -63,27 +127,46 @@
             }
         }
 
-        var plantImages = [
-            "icons/l1seed.PNG",
-            "icons/l2seed.PNG",
-            "icons/l3seed.PNG",
-            "icons/l4seed.PNG",
-            "icons/l5seed.PNG",
-            "icons/l6seed.PNG"
-        ];
+        var plantImages = {
+            basic1: [
+                "icons/l1seed.PNG",
+                "icons/l2seed.PNG",
+                "icons/l3seed.PNG",
+                "icons/l4seed.PNG",
+                "icons/l5seed.PNG",
+                "icons/l6seed.PNG"
+            ],
+            basic2: [
+                "icons/l1flower.PNG",
+                "icons/l2flower.PNG",
+                "icons/l3flower.PNG",
+                "icons/l4flower.PNG",
+                "icons/l5flower.PNG",
+                "icons/l6flower.PNG"
+            ]
+        };
 
+        var currentSeries = localStorage.getItem("currentSeries") || "basic1";
         var plantImage = document.getElementById("plant-image");
         var waterButton = document.getElementById("water-button");
         var scoreSpan = document.querySelector(".score");
         var plantsGrownSpan = document.querySelector(".plants-grown");
+        var seriesSelectionModal = document.getElementById("series-selection-modal");
+        var seriesForm = document.getElementById("series-form");
+        var closeModal = document.querySelector(".close");
 
         var score = parseInt(localStorage.getItem("waterDroplets")) || 0;
         var plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
+        var currentImageIndex = parseInt(localStorage.getItem("currentImageIndex")) || 0;
+
         scoreSpan.textContent = score;
         plantsGrownSpan.textContent = plantsGrown;
 
-        var currentImageIndex = parseInt(localStorage.getItem("currentImageIndex")) || 0;
-        plantImage.src = plantImages[currentImageIndex];
+        if (plantImages[currentSeries] && plantImages[currentSeries][currentImageIndex]) {
+            plantImage.src = plantImages[currentSeries][currentImageIndex];
+        } else {
+            console.error("Image not found for the current series and index.");
+        }
 
         waterButton.addEventListener("click", function () {
             if (score > 0) {
@@ -91,22 +174,42 @@
                 localStorage.setItem("waterDroplets", score);
                 scoreSpan.textContent = score;
 
-                if (plantImage.src.endsWith("l6seed.PNG")) {
+                if (plantImage.src.endsWith(plantImages[currentSeries][plantImages[currentSeries].length - 1])) {
                     plantsGrown++;
                     localStorage.setItem("plantsGrown", plantsGrown);
                     plantsGrownSpan.textContent = plantsGrown;
+
+                    var grownPlants = JSON.parse(localStorage.getItem("grownPlants")) || [];
+                    grownPlants.push(plantImages[currentSeries][currentImageIndex]);
+                    localStorage.setItem("grownPlants", JSON.stringify(grownPlants));
+
+                    seriesSelectionModal.style.display = 'block';
+                } else {
+                    currentImageIndex = (currentImageIndex + 1) % plantImages[currentSeries].length;
+                    localStorage.setItem("currentImageIndex", currentImageIndex);
+                    plantImage.src = plantImages[currentSeries][currentImageIndex];
                 }
             } else {
                 alert("No more water droplets left!");
             }
-
-            currentImageIndex = (currentImageIndex + 1) % plantImages.length;
-            localStorage.setItem("currentImageIndex", currentImageIndex);
-            plantImage.src = plantImages[currentImageIndex];
         });
 
-        document.getElementById("view-plants-button").addEventListener("click", function () {
-            window.location.href = "plants.html"; // Navigate to plants.html
+        seriesForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var selectedSeries = document.querySelector('input[name="series"]:checked').value;
+            if (selectedSeries) {
+                currentSeries = selectedSeries;
+                currentImageIndex = 0;
+                localStorage.setItem("currentSeries", currentSeries);
+                localStorage.setItem("currentImageIndex", currentImageIndex);
+                plantImage.src = plantImages[currentSeries][currentImageIndex];
+
+                seriesSelectionModal.style.display = 'none';
+            }
+        });
+
+        closeModal.addEventListener("click", function() {
+            seriesSelectionModal.style.display = 'none';
         });
 
         window.addEventListener("load", function () {
@@ -116,7 +219,6 @@
             plantsGrownSpan.textContent = plantsGrown;
         });
     </script>
-    
 </body>
 
 </html>
