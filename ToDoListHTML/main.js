@@ -204,14 +204,19 @@ const getLocal = () => {
     if (localTasks) {
         tasks = localTasks;
     }
-    waterDroplets = localWaterDroplets || 0; // Initialize water droplets from localStorage
+    waterDroplets = isNaN(localWaterDroplets) ? 0 : localWaterDroplets; // Properly handle water droplets initialization
 };
 
 let waterDroplets = 0; // Initialize water droplets
 
 // Update UI initially
 const scoreElement = document.querySelector(".score");
+
+// Initialize tasks and water droplets from localStorage
+getLocal(); 
 scoreElement.textContent = waterDroplets;
+calculateTotal();
+renderTasks();
 
 // Functionality to add new tasks
 const categorySelect = document.querySelector("#category-select");
@@ -248,9 +253,3 @@ categories.forEach((category) => {
     option.textContent = category.title;
     categorySelect.appendChild(option);
 });
-
-getLocal(); // Initialize tasks and water droplets from localStorage
-calculateTotal();
-renderTasks();
-
-
