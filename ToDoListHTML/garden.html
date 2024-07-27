@@ -81,6 +81,8 @@
             <img src="" alt="" id="plant-image">
             <button id="water-button">Water💧</button>
         </div>
+        <!--<button id="reset-counter-button">Reset Plant Counter</button>--> <!--for debugging!-->
+
 
         <!-- Series Selection Modal -->
         <div id="series-selection-modal" class="modal">
@@ -224,6 +226,26 @@
                 plantsGrownSpan.textContent = grownPlants.length;
             });
         });
+
+        document.addEventListener("DOMContentLoaded", function() {
+    // Existing code...
+
+    var resetCounterButton = document.getElementById("reset-counter-button");
+
+    // Reset button functionality
+    resetCounterButton.addEventListener("click", function() {
+        // Clear grown plants data from localStorage
+        localStorage.removeItem("grownPlants");
+        // Reset the counter display
+        plantsGrownSpan.textContent = "0";
+        // Optional: Reset current series or other related data
+        currentImageIndex = 0;
+        localStorage.setItem("currentImageIndex", currentImageIndex);
+        if (plantImages[currentSeries] && plantImages[currentSeries][currentImageIndex]) {
+            plantImage.src = plantImages[currentSeries][currentImageIndex];
+        }
+    });
+});
     </script>
 </body>
 
