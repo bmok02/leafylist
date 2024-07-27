@@ -105,119 +105,107 @@
 
     <script src="main.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const backBtn = document.querySelector(".back-btn");
-            backBtn.addEventListener("click", function() {
-                window.location.href = "main.html"; // Replace with your main.html file path
-            });
+       document.addEventListener("DOMContentLoaded", function() {
+    // Back button functionality
+    const backBtn = document.querySelector(".back-btn");
+    backBtn.addEventListener("click", function() {
+        window.location.href = "main.html"; // Replace with your main.html file path
+    });
 
-            const viewPlantsButton = document.getElementById("view-plants-button");
-            viewPlantsButton.addEventListener("click", function() {
-                window.location.href = "plants.html"; // Replace with your plants.html file path
-            });
-        });
+    // View plants button functionality
+    const viewPlantsButton = document.getElementById("view-plants-button");
+    viewPlantsButton.addEventListener("click", function() {
+        window.location.href = "plants.html"; // Replace with your plants.html file path
+    });
 
-        var mode = document.getElementById("mode");
-        mode.onclick = function () {
-            document.body.classList.toggle("dark-theme");
-            if (document.body.classList.contains("dark-theme")) {
-                mode.src = "icons/sun.PNG";
+    // Dark mode toggle functionality
+    var mode = document.getElementById("mode");
+    mode.onclick = function () {
+        document.body.classList.toggle("dark-theme");
+        mode.src = document.body.classList.contains("dark-theme") ? "icons/sun.PNG" : "icons/moon.PNG";
+    }
+
+    // Plant images based on series
+    var plantImages = {
+        basic1: ["icons/l1seed.PNG", "icons/l2seed.PNG", "icons/l3seed.PNG", "icons/l4seed.PNG", "icons/l5seed.PNG", "icons/l6seed.PNG"],
+        basic2: ["icons/l1flower.PNG", "icons/l2flower.PNG", "icons/l3flower.PNG", "icons/l4flower.PNG", "icons/l5flower.PNG", "icons/l6flower.PNG"]
+    };
+
+    // Initialize variables from localStorage
+    var currentSeries = localStorage.getItem("currentSeries") || "basic1";
+    var plantImage = document.getElementById("plant-image");
+    var waterButton = document.getElementById("water-button");
+    var scoreSpan = document.querySelector(".score");
+    var plantsGrownSpan = document.querySelector(".plants-grown");
+    var seriesSelectionModal = document.getElementById("series-selection-modal");
+    var seriesForm = document.getElementById("series-form");
+    var closeModal = document.querySelector(".close");
+
+    var score = parseInt(localStorage.getItem("waterDroplets")) || 0;
+    var grownPlants = JSON.parse(localStorage.getItem("grownPlants")) || [];
+    var currentImageIndex = parseInt(localStorage.getItem("currentImageIndex")) || 0;
+
+    // Set score and grown plants count
+    scoreSpan.textContent = score;
+    plantsGrownSpan.textContent = grownPlants.length;
+
+    // Set the initial plant image
+    if (plantImages[currentSeries] && plantImages[currentSeries][currentImageIndex]) {
+        plantImage.src = plantImages[currentSeries][currentImageIndex];
+    } else {
+        console.error("Image not found for the current series and index.");
+    }
+
+    // Water button functionality
+    waterButton.addEventListener("click", function () {
+        if (score > 0) {
+            score--;
+            localStorage.setItem("waterDroplets", score);
+            scoreSpan.textContent = score;
+
+            if (plantImage.src.endsWith(plantImages[currentSeries][plantImages[currentSeries].length - 1])) {
+                grownPlants.push(plantImages[currentSeries][currentImageIndex]);
+                localStorage.setItem("grownPlants", JSON.stringify(grownPlants));
+                plantsGrownSpan.textContent = grownPlants.length;
+
+                seriesSelectionModal.style.display = 'block';
             } else {
-                mode.src = "icons/moon.PNG";
-            }
-        }
-
-        var plantImages = {
-            basic1: [
-                "icons/l1seed.PNG",
-                "icons/l2seed.PNG",
-                "icons/l3seed.PNG",
-                "icons/l4seed.PNG",
-                "icons/l5seed.PNG",
-                "icons/l6seed.PNG"
-            ],
-            basic2: [
-                "icons/l1flower.PNG",
-                "icons/l2flower.PNG",
-                "icons/l3flower.PNG",
-                "icons/l4flower.PNG",
-                "icons/l5flower.PNG",
-                "icons/l6flower.PNG"
-            ]
-        };
-
-        var currentSeries = localStorage.getItem("currentSeries") || "basic1";
-        var plantImage = document.getElementById("plant-image");
-        var waterButton = document.getElementById("water-button");
-        var scoreSpan = document.querySelector(".score");
-        var plantsGrownSpan = document.querySelector(".plants-grown");
-        var seriesSelectionModal = document.getElementById("series-selection-modal");
-        var seriesForm = document.getElementById("series-form");
-        var closeModal = document.querySelector(".close");
-
-        var score = parseInt(localStorage.getItem("waterDroplets")) || 0;
-        var plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
-        var currentImageIndex = parseInt(localStorage.getItem("currentImageIndex")) || 0;
-
-        scoreSpan.textContent = score;
-        plantsGrownSpan.textContent = plantsGrown;
-
-        if (plantImages[currentSeries] && plantImages[currentSeries][currentImageIndex]) {
-            plantImage.src = plantImages[currentSeries][currentImageIndex];
-        } else {
-            console.error("Image not found for the current series and index.");
-        }
-
-        waterButton.addEventListener("click", function () {
-            if (score > 0) {
-                score--;
-                localStorage.setItem("waterDroplets", score);
-                scoreSpan.textContent = score;
-
-                if (plantImage.src.endsWith(plantImages[currentSeries][plantImages[currentSeries].length - 1])) {
-                    plantsGrown++;
-                    localStorage.setItem("plantsGrown", plantsGrown);
-                    plantsGrownSpan.textContent = plantsGrown;
-
-                    var grownPlants = JSON.parse(localStorage.getItem("grownPlants")) || [];
-                    grownPlants.push(plantImages[currentSeries][currentImageIndex]);
-                    localStorage.setItem("grownPlants", JSON.stringify(grownPlants));
-
-                    seriesSelectionModal.style.display = 'block';
-                } else {
-                    currentImageIndex = (currentImageIndex + 1) % plantImages[currentSeries].length;
-                    localStorage.setItem("currentImageIndex", currentImageIndex);
-                    plantImage.src = plantImages[currentSeries][currentImageIndex];
-                }
-            } else {
-                alert("No more water droplets left!");
-            }
-        });
-
-        seriesForm.addEventListener("submit", function (e) {
-            e.preventDefault();
-            var selectedSeries = document.querySelector('input[name="series"]:checked').value;
-            if (selectedSeries) {
-                currentSeries = selectedSeries;
-                currentImageIndex = 0;
-                localStorage.setItem("currentSeries", currentSeries);
+                currentImageIndex = (currentImageIndex + 1) % plantImages[currentSeries].length;
                 localStorage.setItem("currentImageIndex", currentImageIndex);
                 plantImage.src = plantImages[currentSeries][currentImageIndex];
-
-                seriesSelectionModal.style.display = 'none';
             }
-        });
+        } else {
+            alert("No more water droplets left!");
+        }
+    });
 
-        closeModal.addEventListener("click", function() {
+    // Series selection form submission
+    seriesForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var selectedSeries = document.querySelector('input[name="series"]:checked').value;
+        if (selectedSeries) {
+            currentSeries = selectedSeries;
+            currentImageIndex = 0;
+            localStorage.setItem("currentSeries", currentSeries);
+            localStorage.setItem("currentImageIndex", currentImageIndex);
+            plantImage.src = plantImages[currentSeries][currentImageIndex];
+
             seriesSelectionModal.style.display = 'none';
-        });
+        }
+    });
 
-        window.addEventListener("load", function () {
-            score = parseInt(localStorage.getItem("waterDroplets")) || 0;
-            plantsGrown = parseInt(localStorage.getItem("plantsGrown")) || 0;
-            scoreSpan.textContent = score;
-            plantsGrownSpan.textContent = plantsGrown;
-        });
+    // Close modal functionality
+    closeModal.addEventListener("click", function() {
+        seriesSelectionModal.style.display = 'none';
+    });
+
+    // Load data on page load
+    window.addEventListener("load", function () {
+        scoreSpan.textContent = score;
+        plantsGrownSpan.textContent = grownPlants.length;
+    });
+});
+
     </script>
 </body>
 
