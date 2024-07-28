@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const seriesOptions = [
         { name: 'basic1', label: 'Basic 1 (Seed Series)', image: 'icons/l6seed.PNG', price: 10 },
         { name: 'basic2', label: 'Basic 2 (Flower Series)', image: 'icons/l6flower.PNG', price: 15 },
+        { name: 'sunflower', label: 'Sunflower Series', image: 'icons/l6sunflower.PNG', price: 20 } // New series
     ];
 
     function renderShopItems() {

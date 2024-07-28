@@ -81,8 +81,7 @@
             <img src="" alt="" id="plant-image">
             <button id="water-button">Water💧</button>
         </div>
-        <!--<button id="reset-counter-button">Reset Plant Counter</button>--> <!--for debugging!-->
-
+        <!--<button id="reset-counter-button">Reset Plant Counter</button> --> <!-- Debugging / reset button -->
 
         <!-- Series Selection Modal -->
         <div id="series-selection-modal" class="modal">
@@ -97,7 +96,6 @@
         </div>
     </div>
 
-    <script src="main.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // Back button functionality
@@ -220,32 +218,21 @@
                 seriesSelectionModal.style.display = 'none';
             });
 
-            // Load data on page load
-            window.addEventListener("load", function () {
-                scoreSpan.textContent = score;
-                plantsGrownSpan.textContent = grownPlants.length;
+            // Reset button functionality
+            var resetCounterButton = document.getElementById("reset-counter-button");
+            resetCounterButton.addEventListener("click", function() {
+                // Clear grown plants data from localStorage
+                localStorage.removeItem("grownPlants");
+                // Reset the counter display
+                plantsGrownSpan.textContent = "0";
+                // Optional: Reset current series or other related data
+                currentImageIndex = 0;
+                localStorage.setItem("currentImageIndex", currentImageIndex);
+                if (plantImages[currentSeries] && plantImages[currentSeries][currentImageIndex]) {
+                    plantImage.src = plantImages[currentSeries][currentImageIndex];
+                }
             });
         });
-
-        document.addEventListener("DOMContentLoaded", function() {
-    // Existing code...
-
-    var resetCounterButton = document.getElementById("reset-counter-button");
-
-    // Reset button functionality
-    resetCounterButton.addEventListener("click", function() {
-        // Clear grown plants data from localStorage
-        localStorage.removeItem("grownPlants");
-        // Reset the counter display
-        plantsGrownSpan.textContent = "0";
-        // Optional: Reset current series or other related data
-        currentImageIndex = 0;
-        localStorage.setItem("currentImageIndex", currentImageIndex);
-        if (plantImages[currentSeries] && plantImages[currentSeries][currentImageIndex]) {
-            plantImage.src = plantImages[currentSeries][currentImageIndex];
-        }
-    });
-});
     </script>
 </body>
 
