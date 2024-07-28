@@ -23,7 +23,7 @@
                         <path
                             stroke-linecap="round"
                             stroke-linejoin="round"
-                            d="M3.75 6.75h16.6M3.75 12h16.5m-16.5 5.25H12"
+                            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
                         />        
                     </svg>
                 </div>
@@ -48,6 +48,10 @@
                         <img src="icons/girl-leave.PNG" alt="">
                         <h6> Water Droplets💧: <span class="score"></span></h6> 
                     </div>
+                </div>
+                <!-- Add the logout button here -->
+                <div class="logout-btn">
+                    <button onclick="logout()">Logout</button>
                 </div>
             </div>
             <!-- categories -->
@@ -158,7 +162,11 @@
                 mode.src = "icons/moon.PNG";
             }
         }
+
+        function logout() {
+            // Perform any necessary logout actions here
+            window.location.href = 'login.html';
+        }
     </script>
-    
 </body>
 </html>

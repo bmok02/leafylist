@@ -388,177 +388,159 @@ body {
     height: 3rem;
     border-radius: 50%;
     cursor: pointer;
+    background-color: var(--primary-color);
+    box-shadow: 0 0 15px 5px #0000001d;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--bubble-color);
     transition: all 0.3s;
 }
 
-.add-task-btn.active {
-    z-index: 1;
-    bottom: 20rem;
-    transform: rotate(45deg);
-}
-
-.add-task-btn:hover {
-    transform: scale(1.1);
-}
-
 .add-task-btn svg {
-    width: 2rem;
-    color: var(--secondary-color);
+    width: 1.5rem;
+    transition: all 0.3s;
+}
+
+.add-task-btn.rotate {
+    box-shadow: 0 0 30px 5px #00000029;
+    transform: rotate(45deg);
 }
 
 .add-task {
     position: absolute;
-    bottom: -100%;
-    left: 0;
+    bottom: 1rem;
     width: 100%;
-    padding: 20px 30px;
-    transition: all 0.3s;
-}
-
-.add-task.active {
-    bottom: 0;
-}
-
-.add-task .heading {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.input-group {
-    position: relative;
-    margin-bottom: 20px;
-}
-
-.input-group input,
-.input-group label {
-    display: block;
-    width: 100%;
-}
-
-.input-group input,
-.input-group select {
-    width: 100%;
-    border: 1px solid rgb(24, 27, 30);
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 16px;
-}
-
-.input-group label {
-    width: max-content;
-    padding: 0 5px;
-    margin-top: 5px;
-    font-size: 14px;
-    color: var(--add-word);
-    margin-bottom: 5px;
-}
-
-.btns {
-    display: flex;
-    gap: 1rem;
-    justify-content: flex-end;
-    align-items: center;
-}
-
-.btns button {
-    z-index: 2;
-    padding: 8px 10px;
-    border-radius: 4px;
-    border: none;
-    outline: none;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.btns button.add-btn {
-    background-color: var(--bubble-color);
-    color: var(--secondary-color);
-}
-
-.add-task-backdrop {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 135%;
-    height: 20rem;
-    border-radius: 50% 50% 0 0;
-    background-color: var(--primary-color);
-    border-top: 1px solid;
-}
-
-.black-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    backdrop-filter: blur(5px);
-    background-color: #00000023;
+    padding: 1rem 30px;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s;
 }
 
-.black-backdrop.active {
+.add-task.show {
     opacity: 1;
     visibility: visible;
 }
 
-.center {
-    margin: auto;
-    width: 15%;
-    padding: 10px;
+.add-task input,
+.add-task textarea {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    background-color: rgb(243, 243, 243);
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+    font-family: inherit;
 }
 
-.garden-center {
+.add-task input {
+    margin-bottom: 1rem;
+}
+
+.add-task textarea {
+    resize: none;
+    height: 10rem;
+}
+
+.add-task .btns {
+    margin-top: 1rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    /* Adjust based on your layout */
+    gap: 1rem;
 }
 
-#water-button {
-    padding: 10px 20px;
-    font-size: 16px;
+.add-task .btns button {
+    flex: 1;
+    padding: 0.7rem;
+    border-radius: 5px;
     cursor: pointer;
+    color: white;
+    font-weight: 500;
+    transition: all 0.3s;
 }
-/* New styles for the circular "Garden" button with an icon and text */
+
+.add-task .btns .add-btn {
+    background-color: #7a4ff8;
+}
+
+.add-task .btns .add-btn:hover {
+    background-color: #683ae1;
+}
+
+.add-task .btns .cancel-btn {
+    background-color: var(--secondary-color);
+}
+
+.add-task .btns .cancel-btn:hover {
+    background-color: #142d49;
+}
+
+.add-task p {
+    color: var(--add-word);
+}
+
+/* Garden Button */
 .garden-button-wrapper {
     position: absolute;
-    top: 20px; /* Adjust as needed */
-    left: 20px; /* Adjust as needed */
+    bottom: 20px;
+    left: 20px;
+    z-index: 999;
 }
 
 .garden-button {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 100px; /* Adjust size as needed */
-    height: 60px; /* Adjust size as needed */
-    border-radius: 30px; /* Rounded edges */
-    background-color: #28a745; /* Background color */
-    color: #fff; /* Text color */
-    text-decoration: none;
-    font-size: 16px; /* Adjust font size as needed */
-    text-align: center;
-    padding: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add a shadow for better visibility */
-    transition: background-color 0.3s;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #8bc34a;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .garden-button:hover {
-    background-color: #218838; /* Hover background color */
+    background-color: #7cb342;
 }
 
-.garden-button svg {
-    width: 24px; /* Adjust size as needed */
-    height: 24px; /* Adjust size as needed */
-    margin-right: 8px; /* Space between icon and text */
+.garden-button img {
+    width: 30px;
+    height: 30px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .add-task input,
+    .add-task textarea {
+        font-size: 0.9rem;
+    }
+
+    .add-task .btns button {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .welcome h1 {
+        font-size: 1.2rem;
+    }
+
+    .welcome .img img {
+        width: 4rem;
+    }
+
+    .category .left img {
+        width: 2.5rem;
+    }
+
+    .category .content h1 {
+        font-size: 1.2rem;
+    }
+
+    .category .content p {
+        font-size: 0.7rem;
+    }
+
+    .task {
+        font-size: 0.7rem;
+    }
 }
