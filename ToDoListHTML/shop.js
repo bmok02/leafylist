@@ -97,3 +97,41 @@ document.addEventListener("DOMContentLoaded", function() {
 
     renderShopItems();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Elements
+    var dropletCountSpan = document.getElementById("droplet-count");
+    var resetUnlockedSeriesButton = document.getElementById("reset-unlocked-series-button");
+
+    // Retrieve water droplet count from localStorage
+    var waterDroplets = parseInt(localStorage.getItem("waterDroplets")) || 0;
+    dropletCountSpan.textContent = waterDroplets;
+
+    // Dark mode toggle functionality
+    var mode = document.getElementById("mode");
+    mode.onclick = function () {
+        document.body.classList.toggle("dark-theme");
+        mode.src = document.body.classList.contains("dark-theme") ? "icons/sun.PNG" : "icons/moon.PNG";
+    }
+
+    // Back button functionality
+    var backBtn = document.querySelector(".back-btn");
+    backBtn.addEventListener("click", function () {
+        window.location.href = "main.html"; // Replace with your main.html file path
+    });
+
+    // Reset unlocked series button functionality
+    resetUnlockedSeriesButton.addEventListener("click", function () {
+        // Reset to only have "basic1" series unlocked
+        var unlockedSeries = ["basic1"];
+        localStorage.setItem("unlockedSeries", JSON.stringify(unlockedSeries));
+
+        alert("Unlocked series have been reset to only include Basic 1 (Seed Series).");
+
+        // Optional: Reload the page or refresh the series display
+        // location.reload();
+    });
+
+    // Load shop items and other functionalities
+    // Additional code for loading shop items or other shop-related logic can go here
+});
