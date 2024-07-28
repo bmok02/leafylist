@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
         { name: 'basic3', label: 'Basic 3 (Lily Series)', image: 'icons/l6lily.PNG', price: 30 },
         { name: 'basic4', label: 'Basic 4 (Rose Series)', image: 'icons/l6rose.PNG', price: 35 },
         { name: 'basic5', label: 'Basic 5 (Sunflower Series)', image: 'icons/l6sunflower.PNG', price: 40 }
-        // New series
     ];
 
     function renderShopItems() {
@@ -52,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 localStorage.setItem('unlockedSeries', JSON.stringify(unlockedSeries));
 
                 localStorage.setItem('waterDroplets', waterDroplets - price);
+                updateDropletCountDisplay(); // Update count display
                 alert(`${seriesName} unlocked!`);
                 renderShopItems(); // Re-render the shop items to update the button state
             } else {
@@ -72,6 +72,14 @@ document.addEventListener("DOMContentLoaded", function() {
         window.history.back();
     }
 
+    function updateDropletCountDisplay() {
+        const dropletCountElement = document.getElementById('droplet-count');
+        const waterDroplets = parseInt(localStorage.getItem('waterDroplets')) || 0;
+        if (dropletCountElement) {
+            dropletCountElement.textContent = waterDroplets;
+        }
+    }
+
     const themeButton = document.getElementById('mode');
     themeButton.addEventListener('click', toggleDarkMode);
 
@@ -83,6 +91,9 @@ document.addEventListener("DOMContentLoaded", function() {
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
     }
+
+    // Initial load of droplet count
+    updateDropletCountDisplay();
 
     renderShopItems();
 });
