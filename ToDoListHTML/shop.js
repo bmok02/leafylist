@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", function() {
     const seriesOptions = [
-        { name: 'basic1', label: 'Basic 1 (Seed Series)', image: 'icons/l6seed.PNG', price: 10 },
-        { name: 'basic2', label: 'Basic 2 (Flower Series)', image: 'icons/l6flower.PNG', price: 20 },
+        { name: 'basic1', label: 'Basic 1 (Seed Series)', image: 'icons/l6seed.png', price: 10 },
+        { name: 'basic2', label: 'Basic 2 (Flower Series)', image: 'icons/l6flower.png', price: 20 },
         { name: 'basic3', label: 'Basic 3 (Lily Series)', image: 'icons/l6lily.PNG', price: 30 },
         { name: 'basic4', label: 'Basic 4 (Rose Series)', image: 'icons/l6rose.PNG', price: 35 },
-        { name: 'basic5', label: 'Basic 5 (Sunflower Series)', image: 'icons/l6sunflower.PNG', price: 40 }
+        { name: 'basic5', label: 'Basic 5 (Sunflower Series)', image: 'icons/l6sunflower.png', price: 40 }
     ];
 
     function renderShopItems() {
