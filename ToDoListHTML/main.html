@@ -24,7 +24,7 @@
                             stroke-linecap="round"
                             stroke-linejoin="round"
                             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12"
-                        />        
+                        />
                     </svg>
                 </div>
                 <div class="menu">
@@ -43,14 +43,16 @@
                         <h1>Hello Orbital!</h1>
                         <p>Today you have <span class="totalTasks">0</span> tasks</p>
                     </div>
+                    <!--<button onclick ="reset()" >reset</button>-->
                     <div class="img">
                         <div class="backdrop"></div>
                         <img src="icons/girl-leave.PNG" alt="">
                         <h6> Water Droplets💧: <span class="score"></span></h6> 
                     </div>
                 </div>
-                <!-- Add the logout button here -->
-                <div class="logout-btn">
+                <!-- Add the logout and reset buttons here -->
+                <div class="user-actions">
+                    <!--<button onclick="resetTasks()">Reset Tasks</button>-->
                     <button onclick="logout()">Logout</button>
                 </div>
             </div>
@@ -166,6 +168,13 @@
         function logout() {
             // Perform any necessary logout actions here
             window.location.href = 'login.html';
+        }
+
+        function reset() {
+            // Function to reset all tasks
+            // You can clear tasks data from local storage or your data structure here
+            document.querySelector('.totalTasks').innerText = '0';
+            // Update the UI or reload the page if necessary
         }
     </script>
 </body>

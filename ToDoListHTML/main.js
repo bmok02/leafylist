@@ -267,3 +267,10 @@ categories.forEach((category) => {
     option.textContent = category.title;
     categorySelect.appendChild(option);
 });
+
+function resetTasks() {
+    // Function to reset all tasks
+    localStorage.removeItem('tasks'); // Example for local storage
+    document.querySelector('.totalTasks').innerText = '0';
+    // Update the UI or reload the page if necessary
+}
