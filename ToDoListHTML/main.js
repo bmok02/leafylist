@@ -72,6 +72,19 @@ const totalCategoryTasks = document.querySelector(".category-tasks");
 const categoryImg = document.querySelector("#category-img");
 const totalTasks = document.querySelector(".totalTasks");
 
+const getWaterDropletIncrement = (task) => {
+    switch (task.category.toLowerCase()) {
+        case 'high priority':
+            return 5;
+        case 'mid priority':
+            return 3;
+        case 'low priority':
+            return 1;
+        default:
+            return 0;
+    }
+};
+
 const calculateTotal = () => {
     const categoryTasks = tasks.filter(
         (task) => task.category.toLowerCase() === selectedCategory.title.toLowerCase()
@@ -143,14 +156,15 @@ const renderTasks = () => {
 
             checkbox.addEventListener("change", () => {
                 const index = tasks.findIndex((t) => t.id === task.id);
-                tasks[index].completed = !tasks[index].completed;
-
-                // Update water droplets count based on task completion
+                const increment = getWaterDropletIncrement(task);
+                
                 if (tasks[index].completed) {
-                    waterDroplets++;
+                    waterDroplets -= increment;
                 } else {
-                    waterDroplets--;
+                    waterDroplets += increment;
                 }
+
+                tasks[index].completed = !tasks[index].completed;
 
                 const scoreElement = document.querySelector(".score");
                 scoreElement.textContent = waterDroplets;
